@@ -13,6 +13,8 @@ import Booking from "./models/Booking.js";
 import Event from "./models/Event.js";
  import connectDB from "./config/db.js";
 
+
+   
 connectDB();
 
 // console.log("booking delete");
@@ -24,15 +26,18 @@ connectDB();
 
 const app = express();
 
-app.use(cors());
+// app.use(cors());
+
+
+app.use(cors({
+  origin: process.env.FRONTEND_URL,
+  credentials: true
+}));
 
 app.use(express.json());
 
-console.log("ENV TEST");
-console.log("CLOUD:", process.env.CLOUDINARY_CLOUD_NAME);
-console.log("KEY:", process.env.CLOUDINARY_API_KEY);
-console.log("SECRET:", process.env.CLOUDINARY_API_SECRET);
 
+  
 app.get("/", (req, res) => {
     res.json({
         message: "API Running"
